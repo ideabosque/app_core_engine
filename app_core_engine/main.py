@@ -83,7 +83,7 @@ def deploy() -> List:
                     "support_methods": ["POST"],
                     "is_auth_required": False,
                     "is_graphql": True,
-                    "settings": "beta_core_ai_agent",
+                    "settings": "app_core_engine",
                     "disabled_in_resources": True,  # Ignore adding to resource list.
                 }
             },
