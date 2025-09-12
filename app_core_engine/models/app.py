@@ -66,7 +66,7 @@ class AppModel(BaseModel):
 
 
 def create_app_table(logger: logging.Logger) -> bool:
-    """Create the Agent table if it doesn't exist."""
+    """Create the App table if it doesn't exist."""
     if not AppModel.exists():
         # Create with on-demand billing (PAY_PER_REQUEST)
         AppModel.create_table(billing_mode="PAY_PER_REQUEST", wait=True)
@@ -149,6 +149,8 @@ def resolve_app_list(info: ResolveInfo, **kwargs: Dict[str, Any]) -> Any:
     args = []
     inquiry_funct = AppModel.scan
     count_funct = AppModel.count
+    the_filters = None  # We can add filters for the query.
+
     if app_id:
         args = [app_id, None]
         inquiry_funct = AppModel.query
@@ -157,7 +159,9 @@ def resolve_app_list(info: ResolveInfo, **kwargs: Dict[str, Any]) -> Any:
             args[1] = AppModel.target_id == target_id
             count_funct = AppModel.target_id_index.count
 
-    the_filters = None  # We can add filters for the query.
+    elif target_id:
+        the_filters &= AppModel.target_id == target_id
+
     if platform:
         the_filters &= AppModel.platform == platform
     
