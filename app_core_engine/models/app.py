@@ -119,7 +119,7 @@ def get_app_type(info: ResolveInfo, app: AppModel) -> AppType:
         raise e
     app = app.__dict__["attribute_values"]
     app["app_config"] = app_config
-    return AppType(**Utility.json_loads(Utility.json_dumps(app)))
+    return AppType(**Utility.json_normalize(app))
 
 
 def resolve_app(info: ResolveInfo, **kwargs: Dict[str, Any]) -> AppType:

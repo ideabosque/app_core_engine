@@ -77,7 +77,7 @@ def get_thread_count(platform: str, thread_uuid: str) -> int:
 
 def get_thread_type(info: ResolveInfo, thread: ThreadModel) -> ThreadType:
     thread = thread.__dict__["attribute_values"]
-    return ThreadType(**Utility.json_loads(Utility.json_dumps(thread)))
+    return ThreadType(**Utility.json_normalize(thread))
 
 
 def resolve_thread(info: ResolveInfo, **kwargs: Dict[str, Any]) -> ThreadType:

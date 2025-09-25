@@ -86,7 +86,7 @@ def get_app_config_count(platform: str, app_id: str) -> int:
 def get_app_config_type(info: ResolveInfo, app_config: AppConfigModel) -> AppConfigType:
     
     app_config = app_config.__dict__["attribute_values"]
-    return AppConfigType(**Utility.json_loads(Utility.json_dumps(app_config)))
+    return AppConfigType(**Utility.json_normalize(app_config))
 
 
 def resolve_app_config(info: ResolveInfo, **kwargs: Dict[str, Any]) -> AppConfigType:
