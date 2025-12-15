@@ -27,7 +27,7 @@ from silvaengine_dynamodb_base import (
     monitor_decorator,
     resolve_list_decorator,
 )
-from silvaengine_utility import Utility
+from silvaengine_utility import Serializer
 
 from ..types.app_config import AppConfigListType, AppConfigType
 from .app import resolve_app_list
@@ -86,7 +86,7 @@ def get_app_config_count(platform: str, app_id: str) -> int:
 def get_app_config_type(info: ResolveInfo, app_config: AppConfigModel) -> AppConfigType:
     
     app_config = app_config.__dict__["attribute_values"]
-    return AppConfigType(**Utility.json_normalize(app_config))
+    return AppConfigType(**Serializer.json_normalize(app_config))
 
 
 def resolve_app_config(info: ResolveInfo, **kwargs: Dict[str, Any]) -> AppConfigType:

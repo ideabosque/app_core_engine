@@ -21,7 +21,7 @@ from silvaengine_dynamodb_base import (
     monitor_decorator,
     resolve_list_decorator,
 )
-from silvaengine_utility import Utility
+from silvaengine_utility import Serializer
 
 from ..types.thread import ThreadListType, ThreadType
 
@@ -77,7 +77,7 @@ def get_thread_count(platform: str, thread_uuid: str) -> int:
 
 def get_thread_type(info: ResolveInfo, thread: ThreadModel) -> ThreadType:
     thread = thread.__dict__["attribute_values"]
-    return ThreadType(**Utility.json_normalize(thread))
+    return ThreadType(**Serializer.json_normalize(thread))
 
 
 def resolve_thread(info: ResolveInfo, **kwargs: Dict[str, Any]) -> ThreadType:

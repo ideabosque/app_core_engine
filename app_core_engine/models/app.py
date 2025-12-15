@@ -27,7 +27,7 @@ from silvaengine_dynamodb_base import (
     monitor_decorator,
     resolve_list_decorator,
 )
-from silvaengine_utility import Utility
+from silvaengine_utility import Serializer
 
 from ..types.app import AppListType, AppType
 from .thread import resolve_thread_list
@@ -119,7 +119,7 @@ def get_app_type(info: ResolveInfo, app: AppModel) -> AppType:
         raise e
     app = app.__dict__["attribute_values"]
     app["app_config"] = app_config
-    return AppType(**Utility.json_normalize(app))
+    return AppType(**Serializer.json_normalize(app))
 
 
 def resolve_app(info: ResolveInfo, **kwargs: Dict[str, Any]) -> AppType:

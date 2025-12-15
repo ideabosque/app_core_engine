@@ -8,7 +8,7 @@ from typing import Any, Dict
 
 import boto3
 
-from silvaengine_utility import Utility
+from silvaengine_utility import Graphql
 
 from ..models import utils
 
@@ -100,10 +100,8 @@ class Config:
     @classmethod
     def fetch_graphql_schema(
         cls,
-        logger: logging.Logger,
-        endpoint_id: str,
-        function_name: str,
-        setting: Dict[str, Any] = {},
+        context: Dict[str, Any],
+        function_name: str
     ) -> Dict[str, Any]:
         """
         Fetches and caches a GraphQL schema for a given function.
@@ -119,12 +117,9 @@ class Config:
         """
         # Check if schema exists in cache, if not fetch and store it
         if Config.schemas.get(function_name) is None:
-            Config.schemas[function_name] = Utility.fetch_graphql_schema(
-                logger,
-                endpoint_id,
-                function_name,
-                setting=setting,
-                aws_lambda=Config.aws_lambda,
-                execute_mode=setting.get("execute_mode"),
+            Config.schemas[function_name] = Graphql.fetch_graphql_schema(
+                context=context,
+                funct=function_name,
+                aws_lambda=Config.aws_lambda
             )
         return Config.schemas[function_name]
