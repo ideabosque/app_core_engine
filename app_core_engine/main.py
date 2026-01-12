@@ -111,9 +111,12 @@ class AppCoreEngine(Graphql):
         self.setting = setting
 
     def app_core_engine_graphql(self, **params: Dict[str, Any]) -> Any:
-        schema = Schema(
+        return self.execute(self.__class__.build_graphql_schema(), **params)
+
+    @staticmethod
+    def build_graphql_schema() -> Schema:
+        return Schema(
             query=Query,
             mutation=Mutations,
-            types=type_class(),
+            types=type_class()
         )
-        return self.execute(schema, **params)
