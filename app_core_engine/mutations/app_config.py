@@ -8,8 +8,7 @@ from typing import Any, Dict
 
 from graphene import Boolean, Field, Int, Mutation, String
 
-from silvaengine_utility import JSON
-
+from silvaengine_utility import JSONCamelCase
 from ..models.app_config import delete_app_config, insert_update_app_config
 from ..types.app_config import AppConfigType
 
@@ -20,7 +19,7 @@ class InsertUpdateAppConfig(Mutation):
     class Arguments:
         platform = String(required=True)
         app_id = String(required=True)
-        configuration = JSON(required=True)
+        configuration = JSONCamelCase(required=True)
 
     @staticmethod
     def mutate(root: Any, info: Any, **kwargs: Dict[str, Any]) -> "InsertUpdateAppConfig":

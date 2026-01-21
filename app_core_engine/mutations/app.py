@@ -8,8 +8,7 @@ from typing import Any, Dict
 
 from graphene import Boolean, Field, Int, Mutation, String
 
-from silvaengine_utility import JSON
-
+from silvaengine_utility import JSONCamelCase
 from ..models.app import delete_app, insert_update_app
 from ..types.app import AppType
 
@@ -25,7 +24,7 @@ class InsertUpdateApp(Mutation):
         access_token = String(required=True)
         user_id = String(required=False)
         scope = String(required=False)
-        data = JSON(required=True)
+        data = JSONCamelCase(required=True)
         status = String(required=False)
 
     @staticmethod
