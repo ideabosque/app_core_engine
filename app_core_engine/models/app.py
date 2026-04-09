@@ -262,15 +262,16 @@ def insert_update_app(info: ResolveInfo, **kwargs: Dict[str, Any]) -> None:
     model_funct=get_app,
 )
 def delete_app(info: ResolveInfo, **kwargs: Dict[str, Any]) -> bool:
-    thread_list = resolve_thread_list(
-        info,
-        **{
-            "app_id": kwargs["entity"].app_id,
-            "target_id": kwargs["entity"].target_id,
-        },
-    )
-    if thread_list.total > 0:
-        return False
+    # thread_list = resolve_thread_list(
+    #     info,
+    #     **{
+    #         "platform": kwargs["entity"].platform,
+    #         "app_id": kwargs["entity"].app_id,
+    #         "target_id": kwargs["entity"].target_id,
+    #     },
+    # )
+    # if thread_list.total > 0:
+    #     return False
 
     kwargs["entity"].delete()
 
